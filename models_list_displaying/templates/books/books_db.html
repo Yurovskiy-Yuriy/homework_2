@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог книг{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>
+            <a href="/books/">Каталог</a>
+            {% if current_date %}
+                / {{ current_date|date:"Y-m-d" }}
+            {% endif %}
+        </h1>
+    </div>
+
+    <div class="row">
+        {% if books %}
+            {% for book in books %}
+            <div class="book col-md-4" style="margin-bottom: 20px;">
+                <h2>{{ book.name }}</h2>
+                <p><strong>Автор:</strong> {{ book.author }}</p>
+                <p><strong>Дата публикации:</strong> {{ book.pub_date|date:"Y-m-d" }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12">
+                <p>Книги не найдены.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="navigation" style="margin: 20px 0; padding: 10px; background-color: #f5f5f5; border-radius: 5px;">
+        {% if prev_date %}
+            <a href="/books/{{ prev_date|date:'Y-m-d' }}/" style="margin-right: 10px;">&larr; {{ prev_date|date:"Y-m-d" }}</a>
+        {% else %}
+            <span style="margin-right: 20px; color: #ccc;"></span>
+        {% endif %}
+
+        <a href="/books/" style="margin: 0 20px;">Все книги</a>
+
+        {% if next_date %}
+            <a href="/books/{{ next_date|date:'Y-m-d' }}/" style="margin-left: 10px;">{{ next_date|date:"Y-m-d" }} &rarr;</a>
+        {% else %}
+            <span style="margin-left: 20px; color: #ccc;"></span>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
