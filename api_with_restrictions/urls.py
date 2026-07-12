@@ -21,7 +21,6 @@ from advertisements.views import AdvertisementViewSet
 
 
 router = DefaultRouter()
-# TODO: подключите `AdvertisementViewSet`
 router.register('advertisements', AdvertisementViewSet)
 
 
